@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/shared/services/app-service';
 import { Store , select} from '@ngrx/store';
 import { ADD} from './actions' ;
 import { Observable } from 'rxjs';
+import { Pos } from '../dashboard/dashboard.component';
 
 @Component({
     selector: 'app-form',
@@ -16,12 +17,15 @@ import { Observable } from 'rxjs';
 export class FormComponent implements OnInit {
     public count: Observable<number>;
     pos;
+
+id: number;
     AddPos = this.fb.group({
         serialNumber: ['', Validators.required],
         make: [''],
         owner: [''],
     });
-    constructor(private router: Router, private appService: AppService, private fb: FormBuilder, private store: Store<{count: number}>) {
+    // tslint:disable-next-line:max-line-length
+    constructor(private router: Router, private route: ActivatedRoute, private appService: AppService, private fb: FormBuilder, private store: Store<{count: number}>) {
         this.count = store.pipe (select('count'));
     }
 
@@ -43,9 +47,14 @@ export class FormComponent implements OnInit {
 
     }
 
-    reloadData() {
-        this.pos = this.appService.getPos();
-      }
+    editPos() {
+        this.id = this.route.snapshot.params['id'];
+        this.pos = new Pos (1, '', '', '');
+            this.appService.getPos( this.id).subscribe(
+
+              data => this.pos = data
+            );
+          }
 
     ngOnInit() {
         this.store.dispatch(new ADD());

@@ -6,6 +6,10 @@ import { DashboardComponent } from './dashboard.component';
 import { StatModule } from '../../shared';
 import { counterReducer} from './reducer';
 import {StoreModule} from '@ngrx/store';
+import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+
+
 
 @NgModule({
     imports: [
@@ -14,6 +18,8 @@ import {StoreModule} from '@ngrx/store';
         NgbAlertModule,
         DashboardRoutingModule,
         StatModule,
+        ReactiveFormsModule,
+        HttpClientModule,
         StoreModule.forRoot({count: counterReducer})
     ],
     declarations: [

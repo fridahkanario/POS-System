@@ -42,7 +42,7 @@ export class AppService {
     };
     return this.http.post<any>(this.posUrl, pos, httpOptions);
   }
-  getPos() {
+  getPos(id) {
     return this.http.get<any[]>(this.listUrl);
   }
   setToken(token: string): void {
