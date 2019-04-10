@@ -1,0 +1,36 @@
+<div [@routerTransition]>
+    <h2 class="text-muted"><small></small></h2>
+    <div class="card mb-3">
+        <div class="card-header"><div style="text-align:center">LIST OF THE POSs AVAILBLE</div>
+        <div class="card-body table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>SERIALNUMBER</th>
+                    <th>MAKE</th>
+                    <th>OWNER</th>
+                    <th>CREATED ON</th>
+                    <th>ACTION</th>
+                </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let table of pos">
+                          <td class="hidden">{{table.id}}</td>
+                          <td>{{table.serialNumber}}</td>
+                          <td>{{table.make}}</td>
+                          <td>{{table.owner}}</td>
+                          <td>{{table.date}}</td>
+                          <td >
+                                <div class="buttons">
+                                     <button class="btn btn-primary" ng-click="editPos($index)">Edit</button>
+                                     <button class="btn btn-danger" (click)="deletePos(table.id)">Delete</button>
+                                </div> 
+                            </td>
+                          
+                        </tr>
+                        </tbody>
+            </table>
+        </div>
+    </div>
+</div>
